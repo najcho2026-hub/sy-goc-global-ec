@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> Global EC Daily Dashboard — Global Omni Channel Team</title>
+<title>Global EC Daily Dashboard — Global Omni Channel Team</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
@@ -407,7 +407,7 @@
 
   <div class="panel" id="brandWeeklyTrendPanel" style="margin-bottom:22px;display:none;">
     <p class="panel-title" id="brandWeeklyTrendTitle">브랜드별 주간 매출 트렌드</p>
-    <p class="panel-caption">Weekly GMV by brand · Amazon: REAL W01-W38 (Power BI feed, same source as the companion US_Amazon_Weekly_Report_W38.html) · TikTok Shop: REAL W05-W38 (same feed as TikTok_Shop_Weekly_Report_W38.html) · Amazon: blue bar = Prime Day / surge-week callout, red bars = other real milestones · TikTok Shop has no Prime Day -- black bars = DFYD (6/17-7/2) callout, brand-color bars = other real $10K-tier milestones</p>
+    <p class="panel-caption">Weekly GMV by brand · Amazon: REAL W01-W39 (Power BI feed, same source as the companion US_Amazon_Weekly_Report_W39.html) · TikTok Shop: REAL W05-W39 (same feed as TikTok_Shop_Weekly_Report_W39.html) · Amazon: blue bar = Prime Day / surge-week callout, red bars = other real milestones · TikTok Shop has no Prime Day -- black bars = DFYD (6/17-7/2) callout, brand-color bars = other real $10K-tier milestones</p>
     <p class="platform-sub-label amz">Amazon</p>
     <div class="brand-trend-grid" id="brandTrendGridAmz">
       <div class="brand-trend-cell total-cell"><div class="chart-label">Samyang Foods Total</div><div class="chart-box small"><canvas id="trendAmzTotal"></canvas></div></div>
@@ -425,7 +425,7 @@
   </div>
 
   <div class="panel" id="weeklyGmvTrendPanel" style="margin-bottom:22px;display:none;">
-    <p class="panel-title">주별 GMV 추이 (W5~W38)</p>
+    <p class="panel-title">주별 GMV 추이 (W5~W39)</p>
     <p class="panel-caption">Total GMV (bar) + Buldak/Tangle GMV (line) by week, USD</p>
     <p class="platform-sub-label amz">Amazon</p>
     <div class="gmv-trend-legend"><span><i class="bar" style="background:rgba(150,150,150,.35);"></i>Total GMV</span><span><i style="background:#FF6400;"></i>Buldak GMV</span><span><i style="background:#631243;"></i>Tangle GMV</span></div>
@@ -1918,8 +1918,8 @@ Object.keys(US_TIKTOK_MONTHLY_GMV_USD).forEach(m=>{
 
 // ================================================================
 // US -- Weekly brand-level GMV (feeds Module 1 "브랜드별 주간 매출 트렌드" and
-// Module 2 "주별 GMV 추이 (W5~W38)").
-// Amazon: REAL weekly Buldak/Tangle/MEP/Total GMV, W01-W38 2026 -- sourced
+// Module 2 "주별 GMV 추이 (W5~W39)").
+// Amazon: REAL weekly Buldak/Tangle/MEP/Total GMV, W01-W39 2026 -- sourced
 // from the same Power BI feed as this build's companion report
 // (US_Amazon_Weekly_Report_W32.html, its own brandTrendData/weekLabels30),
 // which aggregates the AmazonUS_Sales feed at weekly grain -- more granular
@@ -1928,11 +1928,11 @@ Object.keys(US_TIKTOK_MONTHLY_GMV_USD).forEach(m=>{
 // (idx 25), confirmed by that report's own primeDayPlugin/PRIME_DAY_IDX --
 // not W25.
 // ================================================================
-const US_WEEK_LABELS = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38']; // through W38 (companion US_Amazon_Weekly_Report_W38.html)
+const US_WEEK_LABELS = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39']; // through W39 (companion US_Amazon_Weekly_Report_W39.html)
 const US_AMZ_WEEKLY_BRAND = {
-  Tangle: [9260.12,16460.70,16124.39,14950.59,11757.40,7218.26,6799.37,9966.51,11773.70,7187.82,11397.69,15266.07,15133.75,12343.41,17051.32,19245.86,24594.45,20947.29,19417.95,19216.36,18496.64,23343.37,24776.11,24839.18,29689.78,68317.73,27665.30,27268.34,38605.80,37393.92,43297.64,44619.21,50478.99,58222.64,56654.76,46585.74,36066.00,30699.02],
-  Buldak: [9052.87,12557.41,10713.66,9170.62,8821.36,5817.96,1367.71,963.51,1197.37,3906.45,10009.37,11549.27,9986.62,10464.14,5420.47,7117.93,11627.67,13110.17,13148.09,12881.14,16128.12,17432.03,17944.17,19007.86,18529.20,30021.40,20257.77,20890.99,21610.04,20394.75,21502.61,22864.60,25064.91,25597.44,18760.84,19396.36,23130.14,23592.28],
-  MEP:    [2809.56,3906.45,2311.93,1731.38,1760.45,1541.75,1721.18,1380.71,1384.63,1122.40,1767.87,1546.94,2272.62,2317.66,2352.72,1833.88,1742.31,2092.05,1724.51,2191.53,2764.15,2042.65,2432.55,2631.07,2284.46,6003.06,3567.66,4163.38,5023.87,5656.25,6072.32,5293.66,5491.14,4233.79,3813.73,2523.37,2279.87,2373.42]
+  Tangle: [9260.12,16460.70,16124.39,14950.59,11757.40,7218.26,6799.37,9966.51,11773.70,7187.82,11397.69,15266.07,15133.75,12343.41,17051.32,19245.86,24594.45,20947.29,19417.95,19216.36,18496.64,23343.37,24776.11,24839.18,29689.78,68317.73,27665.30,27268.34,38605.80,37393.92,43297.64,44619.21,50478.99,58222.64,56654.76,46585.74,36066.00,30699.02,23208.15],
+  Buldak: [9052.87,12557.41,10713.66,9170.62,8821.36,5817.96,1367.71,963.51,1197.37,3906.45,10009.37,11549.27,9986.62,10464.14,5420.47,7117.93,11627.67,13110.17,13148.09,12881.14,16128.12,17432.03,17944.17,19007.86,18529.20,30021.40,20257.77,20890.99,21610.04,20394.75,21502.61,22864.60,25064.91,25597.44,18760.84,19396.36,23130.14,23592.28,24396.22],
+  MEP:    [2809.56,3906.45,2311.93,1731.38,1760.45,1541.75,1721.18,1380.71,1384.63,1122.40,1767.87,1546.94,2272.62,2317.66,2352.72,1833.88,1742.31,2092.05,1724.51,2191.53,2764.15,2042.65,2432.55,2631.07,2284.46,6003.06,3567.66,4163.38,5023.87,5656.25,6072.32,5293.66,5491.14,4233.79,3813.73,2523.37,2279.87,2373.42,1867.24]
 };
 US_AMZ_WEEKLY_BRAND.Total = US_WEEK_LABELS.map((_,i)=> US_AMZ_WEEKLY_BRAND.Tangle[i]+US_AMZ_WEEKLY_BRAND.Buldak[i]+US_AMZ_WEEKLY_BRAND.MEP[i]);
 
@@ -1956,7 +1956,7 @@ const US_AMZ_TREND_COLORS = {
   MEP:    { tint: 'rgba(109,0,3,0.55)',  solid: '#6D0003' }
 };
 
-// TikTok Shop: REAL weekly Buldak/Tangle/Total GMV, W05-W38 2026 -- sourced
+// TikTok Shop: REAL weekly Buldak/Tangle/Total GMV, W05-W39 2026 -- sourced
 // directly from TikTok_Shop_Weekly_Report_W32.html's own trendChart dataset
 // (buldakWeekGmv/tangleWeekGmv/weekLabels), same report family as the
 // US_AMZ_* data above. W01-W04 omitted: pre-launch on this channel, no data.
@@ -1965,14 +1965,14 @@ const US_AMZ_TREND_COLORS = {
 // row). No Prime Day for this channel -- its real callout is DFYD
 // (6/17-7/2, W25-W27), handled by TTS_DFYD_IDX_SET/makeTtsBrandWeeklyChart
 // further down this file (ported from that report's own trendChart plugin).
-const US_TTS_WEEK_LABELS = ['W5','W6','W7','W8','W9','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38'];
+const US_TTS_WEEK_LABELS = ['W5','W6','W7','W8','W9','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39'];
 const US_TTS_WEEKLY_BRAND = {
-  Buldak: [140.86,1102.02,3208.10,3484.73,3361.65,284.57,2344.58,1480.65,216.41,235.48,1803.70,3494.15,3315.40,5610.42,5619.90,5127.20,9526.29,8707.14,13564.10,18643.45,57763.44,67725.14,33601.47,18991.58,18805.89,51025.56,57820.19,18850.28,15123.80,24281.56,74139.34,11008.30,10043.20,55317.60],
-  Tangle: [null,null,null,null,null,null,null,null,null,null,null,null,null,160.20,558.79,990.51,951.63,272.39,824.47,5122.61,18690.27,10583.41,18800.47,7390.34,2646.83,18898.70,33450.45,2508.91,9424.33,11313.29,24721.88,11791.40,10795.70,10065.90]
+  Buldak: [140.86,1102.02,3208.10,3484.73,3361.65,284.57,2344.58,1480.65,216.41,235.48,1803.70,3494.15,3315.40,5610.42,5619.90,5127.20,9526.29,8707.14,13564.10,18643.45,57763.44,67725.14,33601.47,18991.58,18805.89,51025.56,57820.19,18850.28,15123.80,24281.56,74139.34,11008.30,10043.20,55317.60,54495.60],
+  Tangle: [null,null,null,null,null,null,null,null,null,null,null,null,null,160.20,558.79,990.51,951.63,272.39,824.47,5122.61,18690.27,10583.41,18800.47,7390.34,2646.83,18898.70,33450.45,2508.91,9424.33,11313.29,24721.88,11791.40,10795.70,10065.90,7223.00]
 };
 US_TTS_WEEKLY_BRAND.Total = US_TTS_WEEK_LABELS.map((_,i)=> US_TTS_WEEKLY_BRAND.Buldak[i] + (US_TTS_WEEKLY_BRAND.Tangle[i]||0));
 
-// Module 2 (W5-W38) slices, reused from the Module-1 arrays above -- single
+// Module 2 (W5-W39) slices, reused from the Module-1 arrays above -- single
 // source of truth, no duplicated numbers.
 const US_AMZ_GMV5_32 = {
   labels: US_WEEK_LABELS.slice(4),
@@ -6080,12 +6080,12 @@ function renderBrandWeeklyTrend(mkt){
   if(mkt!=='US'){ panel.style.display = 'none'; return; }
   panel.style.display = '';
   destroyUsBrandTrendCharts();
-  // Amazon: real W01-W38 data + real milestone/Prime-Day tiers (see US_AMZ_* above)
+  // Amazon: real W01-W39 data + real milestone/Prime-Day tiers (see US_AMZ_* above)
   makeUsBrandWeeklyChart('trendAmzTotal',  US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Total,  US_AMZ_TREND_COLORS.Total,  US_AMZ_MILESTONE_TIERS.Total,  US_AMZ_MILESTONE_HL.Total,  US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzTangle', US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Tangle, US_AMZ_TREND_COLORS.Tangle, US_AMZ_MILESTONE_TIERS.Tangle, US_AMZ_MILESTONE_HL.Tangle, US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzBuldak', US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Buldak, US_AMZ_TREND_COLORS.Buldak, US_AMZ_MILESTONE_TIERS.Buldak, US_AMZ_MILESTONE_HL.Buldak, US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzMEP',    US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.MEP,    US_AMZ_TREND_COLORS.MEP,    US_AMZ_MILESTONE_TIERS.MEP,    US_AMZ_MILESTONE_HL.MEP,    US_AMZ_PRIME_IDX);
-  // TikTok Shop: real W05-W38 data; no Prime Day for this channel -- DFYD
+  // TikTok Shop: real W05-W39 data; no Prime Day for this channel -- DFYD
   // (6/17-7/2, W25-W27) is the real callout, matching
   // TikTok_Shop_Weekly_Report_W33.html's own trendChart exactly.
   makeTtsBrandWeeklyChart('trendTtsTotal',  US_TTS_WEEK_LABELS, US_TTS_WEEKLY_BRAND.Total,  US_AMZ_TREND_COLORS.Total);
@@ -6093,7 +6093,7 @@ function renderBrandWeeklyTrend(mkt){
   makeTtsBrandWeeklyChart('trendTtsTangle', US_TTS_WEEK_LABELS, US_TTS_WEEKLY_BRAND.Tangle, US_AMZ_TREND_COLORS.Tangle);
 }
 
-// ---- Module 2: "주별 GMV 추이 (W5~W38)" (weekly GMV combo chart, US tab only) ----
+// ---- Module 2: "주별 GMV 추이 (W5~W39)" (weekly GMV combo chart, US tab only) ----
 // Gray Total-GMV bars + orange Buldak-GMV line + dark Tangle-GMV line, same
 // combo-chart shape as TikTok_Shop_Weekly_Report_W32.html's own #trendChart
 // (reused mechanism, re-implemented here rather than copy-pasted).
