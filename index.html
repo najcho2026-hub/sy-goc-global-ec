@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Global EC Daily Dashboard — Global Omni Channel Team</title>
+<title>Global EC Daily Dashboard — e-Commerce Controlling Team</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
@@ -407,7 +407,7 @@
 
   <div class="panel" id="brandWeeklyTrendPanel" style="margin-bottom:22px;display:none;">
     <p class="panel-title" id="brandWeeklyTrendTitle">브랜드별 주간 매출 트렌드</p>
-    <p class="panel-caption">Weekly GMV by brand · Amazon: REAL W01-W40 (Power BI feed, same source as the companion US_Amazon_Weekly_Report_W40.html) · TikTok Shop: REAL W05-W40 (same feed as TikTok_Shop_Weekly_Report_W40.html) · Amazon: blue bar = Prime Day / surge-week callout, red bars = other real milestones · TikTok Shop has no Prime Day -- black bars = DFYD (6/17-7/2) callout, brand-color bars = other real $10K-tier milestones</p>
+    <p class="panel-caption">Weekly GMV by brand · Amazon: REAL W01-W41 (Power BI feed, same source as the companion US_Amazon_Weekly_Report_W41.html) · TikTok Shop: REAL W05-W41 (same feed as TikTok_Shop_Weekly_Report_W41.html) · Amazon: blue bar = Prime Day / surge-week callout, red bars = other real milestones · TikTok Shop has no Prime Day -- black bars = DFYD (6/17-7/2) callout, brand-color bars = other real $10K-tier milestones</p>
     <p class="platform-sub-label amz">Amazon</p>
     <div class="brand-trend-grid" id="brandTrendGridAmz">
       <div class="brand-trend-cell total-cell"><div class="chart-label">Samyang Foods Total</div><div class="chart-box small"><canvas id="trendAmzTotal"></canvas></div></div>
@@ -425,7 +425,7 @@
   </div>
 
   <div class="panel" id="weeklyGmvTrendPanel" style="margin-bottom:22px;display:none;">
-    <p class="panel-title">주별 GMV 추이 (W5~W40)</p>
+    <p class="panel-title">주별 GMV 추이 (W5~W41)</p>
     <p class="panel-caption">Total GMV (bar) + Buldak/Tangle GMV (line) by week, USD</p>
     <p class="platform-sub-label amz">Amazon</p>
     <div class="gmv-trend-legend"><span><i class="bar" style="background:rgba(150,150,150,.35);"></i>Total GMV</span><span><i style="background:#FF6400;"></i>Buldak GMV</span><span><i style="background:#631243;"></i>Tangle GMV</span></div>
@@ -1953,8 +1953,8 @@ Object.keys(US_TIKTOK_MONTHLY_GMV_USD).forEach(m=>{
 
 // ================================================================
 // US -- Weekly brand-level GMV (feeds Module 1 "브랜드별 주간 매출 트렌드" and
-// Module 2 "주별 GMV 추이 (W5~W40)").
-// Amazon: REAL weekly Buldak/Tangle/MEP/Total GMV, W01-W40 2026 -- sourced
+// Module 2 "주별 GMV 추이 (W5~W41)").
+// Amazon: REAL weekly Buldak/Tangle/MEP/Total GMV, W01-W41 2026 -- sourced
 // from the same Power BI feed as this build's companion report
 // (US_Amazon_Weekly_Report_W32.html, its own brandTrendData/weekLabels30),
 // which aggregates the AmazonUS_Sales feed at weekly grain -- more granular
@@ -1963,11 +1963,11 @@ Object.keys(US_TIKTOK_MONTHLY_GMV_USD).forEach(m=>{
 // (idx 25), confirmed by that report's own primeDayPlugin/PRIME_DAY_IDX --
 // not W25.
 // ================================================================
-const US_WEEK_LABELS = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39','W40']; // through W40 (companion US_Amazon_Weekly_Report_W40.html)
+const US_WEEK_LABELS = ['W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39','W40','W41']; // through W41 (companion US_Amazon_Weekly_Report_W41.html)
 const US_AMZ_WEEKLY_BRAND = {
-  Tangle: [9260.12,16460.70,16124.39,14950.59,11757.40,7218.26,6799.37,9966.51,11773.70,7187.82,11397.69,15266.07,15133.75,12343.41,17051.32,19245.86,24594.45,20947.29,19417.95,19216.36,18496.64,23343.37,24776.11,24839.18,29689.78,68317.73,27665.30,27268.34,38605.80,37393.92,43297.64,44619.21,50478.99,58222.64,56654.76,46585.74,36066.00,30699.02,23208.15,26369.04],
-  Buldak: [9052.87,12557.41,10713.66,9170.62,8821.36,5817.96,1367.71,963.51,1197.37,3906.45,10009.37,11549.27,9986.62,10464.14,5420.47,7117.93,11627.67,13110.17,13148.09,12881.14,16128.12,17432.03,17944.17,19007.86,18529.20,30021.40,20257.77,20890.99,21610.04,20394.75,21502.61,22864.60,25064.91,25597.44,18760.84,19396.36,23130.14,23592.28,24396.22,23280.61],
-  MEP:    [2809.56,3906.45,2311.93,1731.38,1760.45,1541.75,1721.18,1380.71,1384.63,1122.40,1767.87,1546.94,2272.62,2317.66,2352.72,1833.88,1742.31,2092.05,1724.51,2191.53,2764.15,2042.65,2432.55,2631.07,2284.46,6003.06,3567.66,4163.38,5023.87,5656.25,6072.32,5293.66,5491.14,4233.79,3813.73,2523.37,2279.87,2373.42,1867.24,1704.91]
+  Tangle: [9260.12,16460.70,16124.39,14950.59,11757.40,7218.26,6799.37,9966.51,11773.70,7187.82,11397.69,15266.07,15133.75,12343.41,17051.32,19245.86,24594.45,20947.29,19417.95,19216.36,18496.64,23343.37,24776.11,24839.18,29689.78,68317.73,27665.30,27268.34,38605.80,37393.92,43297.64,44619.21,50478.99,58222.64,56654.76,46585.74,36066.00,30699.02,23208.15,26369.04,34638.58],
+  Buldak: [9052.87,12557.41,10713.66,9170.62,8821.36,5817.96,1367.71,963.51,1197.37,3906.45,10009.37,11549.27,9986.62,10464.14,5420.47,7117.93,11627.67,13110.17,13148.09,12881.14,16128.12,17432.03,17944.17,19007.86,18529.20,30021.40,20257.77,20890.99,21610.04,20394.75,21502.61,22864.60,25064.91,25597.44,18760.84,19396.36,23130.14,23592.28,24396.22,23280.61,24306.66],
+  MEP:    [2809.56,3906.45,2311.93,1731.38,1760.45,1541.75,1721.18,1380.71,1384.63,1122.40,1767.87,1546.94,2272.62,2317.66,2352.72,1833.88,1742.31,2092.05,1724.51,2191.53,2764.15,2042.65,2432.55,2631.07,2284.46,6003.06,3567.66,4163.38,5023.87,5656.25,6072.32,5293.66,5491.14,4233.79,3813.73,2523.37,2279.87,2373.42,1867.24,1704.91,2570.84]
 };
 US_AMZ_WEEKLY_BRAND.Total = US_WEEK_LABELS.map((_,i)=> US_AMZ_WEEKLY_BRAND.Tangle[i]+US_AMZ_WEEKLY_BRAND.Buldak[i]+US_AMZ_WEEKLY_BRAND.MEP[i]);
 
@@ -1991,7 +1991,7 @@ const US_AMZ_TREND_COLORS = {
   MEP:    { tint: 'rgba(109,0,3,0.55)',  solid: '#6D0003' }
 };
 
-// TikTok Shop: REAL weekly Buldak/Tangle/Total GMV, W05-W40 2026 -- sourced
+// TikTok Shop: REAL weekly Buldak/Tangle/Total GMV, W05-W41 2026 -- sourced
 // directly from TikTok_Shop_Weekly_Report_W32.html's own trendChart dataset
 // (buldakWeekGmv/tangleWeekGmv/weekLabels), same report family as the
 // US_AMZ_* data above. W01-W04 omitted: pre-launch on this channel, no data.
@@ -2000,14 +2000,14 @@ const US_AMZ_TREND_COLORS = {
 // row). No Prime Day for this channel -- its real callout is DFYD
 // (6/17-7/2, W25-W27), handled by TTS_DFYD_IDX_SET/makeTtsBrandWeeklyChart
 // further down this file (ported from that report's own trendChart plugin).
-const US_TTS_WEEK_LABELS = ['W5','W6','W7','W8','W9','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39','W40'];
+const US_TTS_WEEK_LABELS = ['W5','W6','W7','W8','W9','W10','W11','W12','W13','W14','W15','W16','W17','W18','W19','W20','W21','W22','W23','W24','W25','W26','W27','W28','W29','W30','W31','W32','W33','W34','W35','W36','W37','W38','W39','W40','W41'];
 const US_TTS_WEEKLY_BRAND = {
-  Buldak: [140.86,1102.02,3208.10,3484.73,3361.65,284.57,2344.58,1480.65,216.41,235.48,1803.70,3494.15,3315.40,5610.42,5619.90,5127.20,9526.29,8707.14,13564.10,18643.45,57763.44,67725.14,33601.47,18991.58,18805.89,51025.56,57820.19,18850.28,15123.80,24281.56,74139.34,11008.30,10043.20,55317.60,54495.60,16740.20],
-  Tangle: [null,null,null,null,null,null,null,null,null,null,null,null,null,160.20,558.79,990.51,951.63,272.39,824.47,5122.61,18690.27,10583.41,18800.47,7390.34,2646.83,18898.70,33450.45,2508.91,9424.33,11313.29,24721.88,11791.40,10795.70,10065.90,7223.00,6180.00]
+  Buldak: [140.86,1102.02,3208.10,3484.73,3361.65,284.57,2344.58,1480.65,216.41,235.48,1803.70,3494.15,3315.40,5610.42,5619.90,5127.20,9526.29,8707.14,13564.10,18643.45,57763.44,67725.14,33601.47,18991.58,18805.89,51025.56,57820.19,18850.28,15123.80,24281.56,74139.34,11008.30,10043.20,55317.60,54495.60,16740.20,28537.30],
+  Tangle: [null,null,null,null,null,null,null,null,null,null,null,null,null,160.20,558.79,990.51,951.63,272.39,824.47,5122.61,18690.27,10583.41,18800.47,7390.34,2646.83,18898.70,33450.45,2508.91,9424.33,11313.29,24721.88,11791.40,10795.70,10065.90,7223.00,6180.00,9697.30]
 };
 US_TTS_WEEKLY_BRAND.Total = US_TTS_WEEK_LABELS.map((_,i)=> US_TTS_WEEKLY_BRAND.Buldak[i] + (US_TTS_WEEKLY_BRAND.Tangle[i]||0));
 
-// Module 2 (W5-W40) slices, reused from the Module-1 arrays above -- single
+// Module 2 (W5-W41) slices, reused from the Module-1 arrays above -- single
 // source of truth, no duplicated numbers.
 const US_AMZ_GMV5_32 = {
   labels: US_WEEK_LABELS.slice(4),
@@ -4738,33 +4738,29 @@ function renderKrAovCountryFillChart(rangeMonths, mkt){
 // copied directly from the report. MEP isn't in this week's Ads Performance
 // table at all (no MEP ad campaigns ran W38 per the report), so it's
 // dropped rather than carrying forward a stale row.
-const ADS_PERF_WINDOW = {from:'2026-09-28', to:'2026-10-04'}; // W40
+const ADS_PERF_WINDOW = {from:'2026-10-05', to:'2026-10-11'}; // W41
+const ADS_PERF_WEEK_LABEL = 'W41'; // indexes into US_WEEK_LABELS/US_AMZ_WEEKLY_BRAND.Total for the grand-row TACoS denominator below
 const ADS_PERF_ORDER = {Tangle:['SP','SB','SBV'], Buldak:['SP','SB','SBV']};
-// W40 (09/28-10/04), real, from the US_Amazon_Weekly_Report_W40 Ads
-// Performance section. Tangle ran ZERO ads this week (full stop, $0 spend)
-// due to the ongoing sellable-inventory stockout flagged in section 1/5 of
-// that report -- not a data gap, a real $0 week -- so every Tangle row is
-// genuinely all-zero (Tangle's real $26,369.04 organic GMV that week is
-// reported separately on the Brand Performance panel, not here; this table
-// is ad-driven performance only, and with no ad rows there is nothing to
-// attribute any of that GMV to, same as the report's own framing). Buldak
-// SBV did not run this week either ("이번 주 미집행") -- also genuinely zero,
-// not missing. Buldak SB figures are CPC-only, excluding the separately
-// reported VCPM sub-campaign (spend $547.7, attributed sales $8,438.6, 680
-// orders), matching the report's own footnote convention. Buldak SB's
-// TotalSales = Buldak's real brand GMV ($23,280.61) minus SP's AdSales
-// ($11,922.0) -- the whole remainder, since SB is the only other ad row
-// running this week (no SBV to share it with).
+// W41 (10/05-10/11), real, from the US_Amazon_Weekly_Report_W41 Ads
+// Performance section. Tangle ads resumed 10/5 (after the W39/W40 stockout
+// pause) -- real SP+SB rows again this week, no SBV ("미집행"). Buldak SBV
+// also stayed off this week. Buldak SB figures are CPC-only, excluding the
+// separately reported VCPM sub-campaign (spend $531.3, attributed sales
+// $10,163.0, 884 orders), matching the report's own footnote convention.
+// Each brand's SB TotalSales = that brand's real weekly GMV (Module 1
+// US_AMZ_WEEKLY_BRAND, W41) minus SP's AdSales -- the whole remainder,
+// since SB is the only other ad row running for either brand this week (no
+// SBV to split it with).
 const ADS_PERF_DATA = {
   Tangle: {
-    SP:  {Impressions:0, Clicks:0, Spend:0, Orders:0, AdSales:0, TotalSales:0, NTBOrders:0, NTBSales:0},
-    SB:  {Impressions:0, Clicks:0, Spend:0, Orders:0, AdSales:0, TotalSales:0, NTBOrders:0, NTBSales:0},
-    SBV: {Impressions:0, Clicks:0, Spend:0, Orders:0, AdSales:0, TotalSales:0, NTBOrders:0, NTBSales:0}
+    SP:  {Impressions:158563, Clicks:2152, Spend:1748.0, Orders:605, AdSales:7363.3, TotalSales:7363.3,  NTBOrders:0,   NTBSales:0},
+    SB:  {Impressions:20387,  Clicks:667,  Spend:855.1,  Orders:256, AdSales:2897.1, TotalSales:27275.28, NTBOrders:149, NTBSales:1705.6},
+    SBV: {Impressions:0,      Clicks:0,    Spend:0,      Orders:0,   AdSales:0,      TotalSales:0,        NTBOrders:0,   NTBSales:0}
   },
   Buldak: {
-    SP:  {Impressions:1088160, Clicks:5052, Spend:4339.5, Orders:986, AdSales:11922.0, TotalSales:11922.0,  NTBOrders:0,  NTBSales:0},
-    SB:  {Impressions:199001,  Clicks:455,  Spend:550.1,  Orders:67,  AdSales:781.8,   TotalSales:11358.61, NTBOrders:42, NTBSales:484.9},
-    SBV: {Impressions:0,       Clicks:0,    Spend:0,      Orders:0,   AdSales:0,       TotalSales:0,        NTBOrders:0,  NTBSales:0}
+    SP:  {Impressions:1010280, Clicks:4892, Spend:4656.4, Orders:1032, AdSales:11859.7, TotalSales:11859.7,  NTBOrders:0, NTBSales:0},
+    SB:  {Impressions:29313,   Clicks:53,   Spend:75.4,   Orders:8,    AdSales:90.3,    TotalSales:12446.96, NTBOrders:7, NTBSales:82.8},
+    SBV: {Impressions:0,       Clicks:0,    Spend:0,      Orders:0,    AdSales:0,       TotalSales:0,        NTBOrders:0, NTBSales:0}
   }
 };
 function adsPerfDerive(r){
@@ -4822,14 +4818,17 @@ function renderAdsPerfPanel(){
     rowsHtml += adsPerfRowHtml(`<td style="font-weight:700;">Total</td>`, brandTotal, 'ads-brand-total');
   });
   const grand = adsPerfSumRows(brandTotals);
-  // W40: Tangle ran no ads at all (stockout), so Tangle's real organic GMV
-  // never enters brandTotals.TotalSales (no ad row to carry it) -- the grand
-  // row's TACoS must still be measured against the FULL company weekly
-  // sell-out sales ($53,353.56, incl. Tangle's organic $26,369.04 + MEP),
-  // matching the report's own stated "전체 TACoS 9.2%", not just Buldak's
-  // ad-attributed total. Revert this override once Tangle's ads resume and
-  // its rows carry real figures again.
-  if(ADS_PERF_WINDOW.from==='2026-09-28') grand.TotalSales = 53353.56;
+  // The grand row's TACoS must be measured against the FULL company weekly
+  // sell-out sales (Tangle+Buldak+MEP), not just the sum of the ad-tracked
+  // brands' own derived TotalSales above -- MEP never appears in
+  // ADS_PERF_ORDER/ADS_PERF_DATA (no ad spend any week), and some weeks a
+  // tracked brand runs zero ads too (e.g. W40's Tangle stockout), leaving
+  // its real GMV with no ad row to carry it. Pulling this week's real total
+  // straight from US_AMZ_WEEKLY_BRAND.Total (Module 1, kept current every
+  // week) keeps this correct automatically -- no per-week magic number to
+  // remember to update or revert.
+  const adsPerfWeekIdx = US_WEEK_LABELS.indexOf(ADS_PERF_WEEK_LABEL);
+  if(adsPerfWeekIdx>=0) grand.TotalSales = US_AMZ_WEEKLY_BRAND.Total[adsPerfWeekIdx];
   rowsHtml += adsPerfRowHtml(`<td colspan="2" style="font-weight:700;">Total</td>`, grand, 'ads-grand-total');
 
   const scroll = document.getElementById('adsPerfTableScroll');
@@ -4847,7 +4846,7 @@ function renderAdsPerfPanel(){
   // this week (W38 section 6), not an invented daily-range claim.
   const gd = adsPerfDerive(grand);
   const hl = document.getElementById('adsPerfHighlight');
-  if(hl) hl.innerHTML = `Buldak RoAS(광고비 대비 매출) <b>${gd.roas.toFixed(2)}</b>, ACoS <b>${gd.acos.toFixed(1)}%</b> · 전사 TACoS <b>${gd.tacos.toFixed(1)}%</b> — Tangle은 재고 품절 이슈로 광고 전면 중단(지출 $0, 전주 $3.4K), 광고 재개 시 TACoS 상승 전망 · Buldak SB VCPM halo 효과 10주째 지속 (${fmtShortDate(ADS_PERF_WINDOW.from)}–${fmtShortDate(ADS_PERF_WINDOW.to)} 2026 집계)`;
+  if(hl) hl.innerHTML = `전체 RoAS(광고비 대비 매출) <b>${gd.roas.toFixed(2)}</b>, ACoS <b>${gd.acos.toFixed(1)}%</b> · 전사 TACoS <b>${gd.tacos.toFixed(1)}%</b> — Tangle 광고 10/5 재개(지출 $2.6K, RoAS 3.9)로 광고 지출 전주 대비 +50% 증가 속에서도 전체 RoAS 2.6→3.0 개선 · Buldak SB VCPM halo 효과 11주째 지속 (${fmtShortDate(ADS_PERF_WINDOW.from)}–${fmtShortDate(ADS_PERF_WINDOW.to)} 2026 집계)`;
 }
 
 function renderKrStatsTable(mkt, rangeMonths){
@@ -5892,7 +5891,7 @@ function renderNewBrandBreakdownTable(mkt){
       monthlyByBrand[m] = scaled;
     });
     if(capEl) capEl.textContent = `Jan–${lastShortMonth} 2026, Korea (Coupang + Naver) · real brand-level GMV (KRW millions), grouped into 불닭계열(불닭+불닭소스) / 삼양계열(삼양라면+삼양1963+짜르르, tracked individually — core GTM products) / 맵탱 / 탱글 / 펄스랩 / 그 외(나머지 9개 카테고리)`;
-    document.getElementById('brandBreakdownScroll').innerHTML = buildGenericBrandTable('Korea', monthlyByBrand, KR_FAMILY_ORDER, shownMonths, '백만원', '브랜드별 GMV(Coupang+Naver), 백만원 단위 — 불닭/삼양 계열은 같은 색 계열의 다른 명암으로 표시 · Jan-Jul 실측, Aug-Sep은 7월 비중을 실제 월 총액에 적용한 추정치(쿠팡 SKU 원본 08/13 이후 미갱신)');
+    document.getElementById('brandBreakdownScroll').innerHTML = buildGenericBrandTable('Korea', monthlyByBrand, KR_FAMILY_ORDER, shownMonths, '백만원', '브랜드별 GMV(Coupang+Naver), 백만원 단위 — 불닭/삼양 계열은 같은 색 계열의 다른 명암으로 표시 · ' + (KR_BRAND_MONTHLY_ESTIMATED.size ? ('Jan-Jul 실측, ' + [...KR_BRAND_MONTHLY_ESTIMATED].sort().map(k=>MONTH_NAME[k]).join('-') + '은 7월 비중을 실제 월 총액에 적용한 추정치(쿠팡 SKU 원본 미갱신)') : '전 구간 실측(쿠팡+네이버 SKU 원본 합산)'));
     renderKrFamilyCharts(shownMonths);
     const wrap = document.getElementById('krFamilyChartsWrap');
     if(wrap) wrap.style.display = '';
@@ -6161,12 +6160,12 @@ function renderBrandWeeklyTrend(mkt){
   if(mkt!=='US'){ panel.style.display = 'none'; return; }
   panel.style.display = '';
   destroyUsBrandTrendCharts();
-  // Amazon: real W01-W40 data + real milestone/Prime-Day tiers (see US_AMZ_* above)
+  // Amazon: real W01-W41 data + real milestone/Prime-Day tiers (see US_AMZ_* above)
   makeUsBrandWeeklyChart('trendAmzTotal',  US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Total,  US_AMZ_TREND_COLORS.Total,  US_AMZ_MILESTONE_TIERS.Total,  US_AMZ_MILESTONE_HL.Total,  US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzTangle', US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Tangle, US_AMZ_TREND_COLORS.Tangle, US_AMZ_MILESTONE_TIERS.Tangle, US_AMZ_MILESTONE_HL.Tangle, US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzBuldak', US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.Buldak, US_AMZ_TREND_COLORS.Buldak, US_AMZ_MILESTONE_TIERS.Buldak, US_AMZ_MILESTONE_HL.Buldak, US_AMZ_PRIME_IDX);
   makeUsBrandWeeklyChart('trendAmzMEP',    US_WEEK_LABELS, US_AMZ_WEEKLY_BRAND.MEP,    US_AMZ_TREND_COLORS.MEP,    US_AMZ_MILESTONE_TIERS.MEP,    US_AMZ_MILESTONE_HL.MEP,    US_AMZ_PRIME_IDX);
-  // TikTok Shop: real W05-W40 data; no Prime Day for this channel -- DFYD
+  // TikTok Shop: real W05-W41 data; no Prime Day for this channel -- DFYD
   // (6/17-7/2, W25-W27) is the real callout, matching
   // TikTok_Shop_Weekly_Report_W33.html's own trendChart exactly.
   makeTtsBrandWeeklyChart('trendTtsTotal',  US_TTS_WEEK_LABELS, US_TTS_WEEKLY_BRAND.Total,  US_AMZ_TREND_COLORS.Total);
@@ -6174,7 +6173,7 @@ function renderBrandWeeklyTrend(mkt){
   makeTtsBrandWeeklyChart('trendTtsTangle', US_TTS_WEEK_LABELS, US_TTS_WEEKLY_BRAND.Tangle, US_AMZ_TREND_COLORS.Tangle);
 }
 
-// ---- Module 2: "주별 GMV 추이 (W5~W40)" (weekly GMV combo chart, US tab only) ----
+// ---- Module 2: "주별 GMV 추이 (W5~W41)" (weekly GMV combo chart, US tab only) ----
 // Gray Total-GMV bars + orange Buldak-GMV line + dark Tangle-GMV line, same
 // combo-chart shape as TikTok_Shop_Weekly_Report_W32.html's own #trendChart
 // (reused mechanism, re-implemented here rather than copy-pasted).
@@ -7277,6 +7276,38 @@ function rowsToKrDaily(coupangRows, naverRows){
   return out;
 }
 
+// v40: Korea brand-level monthly GMV from the SKU-level Coupang + Naver tabs
+// (Brand tag column, same method as the baked Jan-Jul KR_BRAND_MONTHLY).
+function rowsToKrBrandMonthly(coupangRows, naverRows){
+  const out = {};
+  const add = (month, tag, v)=>{
+    if(!month || !v) return;
+    if(!out[month]) out[month] = {};
+    out[month][tag] = (out[month][tag]||0) + v;
+  };
+  const known = new Set(['불닭','불닭소스','삼양라면','삼양1963','짜르르','탱글','맵탱','펄스랩', ...KR_OTHER_TAGS]);
+  const norm = t=>{ t = String(t||'').trim(); return known.has(t) ? t : '기타'; };
+  if(coupangRows && coupangRows.length>1){
+    const idx = headerIdx(coupangRows[0]);
+    const bCol = idx['Brand']!=null?idx['Brand']:1;
+    const gCol = idx['매출액(GMV)']!=null?idx['매출액(GMV)']:12;
+    for(let i=1;i<coupangRows.length;i++){
+      const r = coupangRows[i]; const d = parseSheetDate(r[2]); if(!d) continue;
+      add(d.slice(0,7), norm(r[bCol]), moneyNum(r[gCol]));
+    }
+  }
+  if(naverRows && naverRows.length>1){
+    const idx = headerIdx(naverRows[0]);
+    const bCol = idx['Brand']!=null?idx['Brand']:1;
+    const dCol = idx['날짜']!=null?idx['날짜']:2, gCol = idx['판매금액(총)']!=null?idx['판매금액(총)']:8;
+    for(let i=1;i<naverRows.length;i++){
+      const r = naverRows[i]; const d = parseSheetDate(r[dCol]); if(!d) continue;
+      add(d.slice(0,7), norm(r[bCol]), moneyNum(r[gCol]));
+    }
+  }
+  return out;
+}
+
 // Real monthly actual/orders/pv per channel, summed straight from the daily
 // records above -- target is intentionally left untouched (see KR_MONTHLY_TARGET).
 function aggregateKrMonthlyFromDaily(krDaily){
@@ -7578,7 +7609,7 @@ async function loadKrUsLiveData(){
   // sum below for KR_MONTHLY/KR_CHANNEL_MONTHLY (the Monthly toggle). The
   // daily sum is still used for the Daily view chart and as a fallback here
   // if the tracker fetch itself fails.
-  let trackerMonthly = null, trackerChannelMonthly = null;
+  let trackerMonthly = null, trackerChannelMonthly = null, trackerChannelStats = null;
   try {
     // Tracker (targets + 2025 baseline + real monthly actual/orders/pv) is
     // best-effort and fetched first -- if it fails, KR_MONTHLY_TARGET/
@@ -7612,7 +7643,7 @@ async function loadKrUsLiveData(){
       // rather than a daily SKU-level resum that can drift meaningfully in
       // some months (cancellations/returns net out differently at
       // month-close -- see the KR Daily chart's own caption).
-      trackerMonthly = {}; trackerChannelMonthly = {};
+      trackerMonthly = {}; trackerChannelMonthly = {}; trackerChannelStats = {};
       monthKeysSorted.forEach((m,i)=>{
         const c = tracker.Coupang||{}, n = tracker.Naver||{};
         const actualC = c.gmv2026 ? c.gmv2026[i] : null;
@@ -7624,6 +7655,7 @@ async function loadKrUsLiveData(){
         const pvN = (n.pv2026 && n.pv2026[i]) || 0;
         trackerMonthly[m] = { actual: (actualC||0)+(actualN||0), orders: ordersC+ordersN, pv: pvC+pvN };
         trackerChannelMonthly[m] = { Coupang: actualC||0, Naver: actualN||0 };
+        trackerChannelStats[m] = { Coupang:{actual:actualC||0, orders:ordersC, pv:pvC}, Naver:{actual:actualN||0, orders:ordersN, pv:pvN} };
       });
     } catch(e){ console.warn('KR tracker (target/2025 baseline/monthly actuals) refresh failed, keeping fallback', e); }
 
@@ -7654,6 +7686,40 @@ async function loadKrUsLiveData(){
     });
     KR_MONTHLY = newKrMonthly;
     KR_CHANNEL_MONTHLY = { ...FALLBACK_KR_CHANNEL_MONTHLY, ...newKrChannelMonthly };
+    // v39: KR_CHANNEL_STATS (feeds AOV/CVR by country + by platform, Korea tabs
+    // and tables) was hardcoded and never refreshed, so months after the baked
+    // snapshot (e.g. Oct) stayed 0 and Korea lines stopped. Rebuild actual/
+    // orders/pv/aov/cvr per channel from the live tracker (fallback: daily
+    // sums). Targets are left untouched.
+    Object.keys(KR_CHANNEL_STATS).forEach(m=>{
+      const t = trackerChannelStats && trackerChannelStats[m];
+      const pm = perMonth[m];
+      ['Coupang','Naver'].forEach(ch=>{
+        let actual=0, orders=0, pv=0;
+        if(t && (t[ch].actual>0 || t[ch].orders>0)){ actual=t[ch].actual; orders=t[ch].orders; pv=t[ch].pv; }
+        else if(pm && pm[ch] && (pm[ch].gmv>0 || pm[ch].orders>0)){ actual=pm[ch].gmv; orders=pm[ch].orders; pv=pm[ch].pv; }
+        else return;
+        const row = KR_CHANNEL_STATS[m][ch];
+        row.actual = actual; row.orders = orders; row.pv = pv;
+        row.aov = orders ? Math.round(actual/orders) : 0;
+        row.cvr = pv ? Math.round(orders/pv*1000)/10 : 0;
+      });
+    });
+    // v40: replace estimated/missing months in KR_BRAND_MONTHLY with real brand
+    // sums from the live SKU tabs. Months already real in the baked table
+    // (Jan-Jul) are left untouched. Falls back silently to the baked table.
+    try {
+      const liveBrand = rowsToKrBrandMonthly(coupangRows, naverRows);
+      Object.keys(liveBrand).sort().forEach(m=>{
+        const baked = KR_BRAND_MONTHLY[m];
+        const isReal = baked && !KR_BRAND_MONTHLY_ESTIMATED.has(m);
+        if(isReal) return;
+        const total = Object.values(liveBrand[m]).reduce((a,b)=>a+b,0);
+        if(total<=0) return;
+        KR_BRAND_MONTHLY[m] = liveBrand[m];
+        KR_BRAND_MONTHLY_ESTIMATED.delete(m);
+      });
+    } catch(e){ console.warn('KR brand live refresh failed, keeping baked brand table', e); }
     // Keep Korea's own range picker tracking full YTD as new days land, same
     // clamp-or-track rule the APAC picker uses (see loadLiveData above).
     if(!krRangeUserSet){
