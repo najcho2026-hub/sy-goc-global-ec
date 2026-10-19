@@ -407,7 +407,7 @@
 
   <div class="panel" id="brandWeeklyTrendPanel" style="margin-bottom:22px;display:none;">
     <p class="panel-title" id="brandWeeklyTrendTitle">브랜드별 주간 매출 트렌드</p>
-    <p class="panel-caption">Weekly GMV by brand · Amazon: REAL W01-W41 (Power BI feed, same source as the companion US_Amazon_Weekly_Report_W41.html) · TikTok Shop: REAL W05-W41 (same feed as TikTok_Shop_Weekly_Report_W41.html) · Amazon: blue bar = Prime Day / surge-week callout, red bars = other real milestones · TikTok Shop has no Prime Day -- black bars = DFYD (6/17-7/2) callout, brand-color bars = other real $10K-tier milestones</p>
+    <p class="panel-caption">data sync from us weekly report</p>
     <p class="platform-sub-label amz">Amazon</p>
     <div class="brand-trend-grid" id="brandTrendGridAmz">
       <div class="brand-trend-cell total-cell"><div class="chart-label">Samyang Foods Total</div><div class="chart-box small"><canvas id="trendAmzTotal"></canvas></div></div>
@@ -416,7 +416,6 @@
       <div class="brand-trend-cell"><div class="chart-label" style="color:#6D0003;">MEP</div><div class="chart-box small"><canvas id="trendAmzMEP"></canvas></div></div>
     </div>
     <p class="platform-sub-label tts">TikTok Shop</p>
-    <p class="panel-caption" style="margin-top:-6px;">W01-W04 omitted (pre-launch on this channel, no data). No MEP panel: TikTok Shop only carries Buldak + Tangle listings today.</p>
     <div class="brand-trend-grid" id="brandTrendGridTts">
       <div class="brand-trend-cell total-cell"><div class="chart-label">Samyang Foods Total</div><div class="chart-box small"><canvas id="trendTtsTotal"></canvas></div></div>
       <div class="brand-trend-cell"><div class="chart-label" style="color:#631243;">Tangle</div><div class="chart-box small"><canvas id="trendTtsTangle"></canvas></div></div>
@@ -437,10 +436,10 @@
 
   <div class="panel" id="krChannelTablePanel" style="margin-bottom:22px;display:none;">
     <p class="panel-title" id="krChannelTablePanelTitle">Korea platform breakdown (Coupang vs Naver)</p>
-    <p class="panel-caption" id="krChannelTableCaption">Jan-YTD, real monthly GMV by platform (Coupang + Naver), same source as Korea's monthly total</p>
+    <p class="panel-caption" id="krChannelTableCaption">Jan-YTD, real monthly GMV by platform (Coupang + Naver)</p>
     <div class="table-scroll" style="max-height:360px;" id="krChannelTableScroll"></div>
     <p class="panel-title" id="krStatsSectionTitle" style="font-size:13px;margin-top:16px;border-top:1px dashed var(--border);padding-top:12px;">Orders · AOV · CVR · Traffic (PV) by platform</p>
-    <p class="panel-caption" id="krStatsSectionCaption" style="margin-bottom:6px;">Jan-YTD, real monthly data, Coupang vs Naver side by side (same source)</p>
+    <p class="panel-caption" id="krStatsSectionCaption" style="margin-bottom:6px;">Jan-YTD, real monthly data, Coupang vs Naver</p>
     <div class="table-scroll" style="max-height:360px;" id="krStatsTableScroll"></div>
   </div>
 
@@ -551,11 +550,6 @@
     </div>
   </div>
 
-  <p class="footnote">
-    <b>Source:</b> APAC EC RAW DATA (consolidated Google Sheet, per-market Shopee/Lazada/TikTok Shop raw exports). &nbsp;
-    <b>AOV:</b> GMV ÷ Orders. &nbsp;
-    <b>Note:</b> SG does not run Lazada — excluded from SG channel breakdowns, filters, and totals. SG Feb reflects a near-total traffic gap in the source tracker.
-  </p>
 
   <div class="page-footer">©Najeong Cho. All rights reserved.</div>
 
@@ -613,11 +607,7 @@ let TARGETS_PLATFORM = {
     'Lazada':      {'2026-01':1881000,'2026-02':2194500,'2026-03':2821500,'2026-04':2194500,'2026-05':2508000,'2026-06':2821500,'2026-07':2821500,'2026-08':2194500,'2026-09':2821500,'2026-10':2508000,'2026-11':3762000,'2026-12':2821500},
     'TikTok Shop': {'2026-01':0,'2026-02':0,'2026-03':594000,'2026-04':1633500,'2026-05':1336500,'2026-06':1782000,'2026-07':1485000,'2026-08':1485000,'2026-09':1782000,'2026-10':1336500,'2026-11':1782000,'2026-12':1633500}
   },
-  SG: {
-    // SG_ target tab (gid 1150667618): "Singapore Monthly Platform Target vs Actual (SGD)" -- monthly total x each platform's actual GMV share
-    'Shopee':      {'2026-01':0,'2026-02':0,'2026-03':4584,'2026-04':22376,'2026-05':22376,'2026-06':39708,'2026-07':23190,'2026-08':22417,'2026-09':39383,'2026-10':22417,'2026-11':39383,'2026-12':22417},
-    'TikTok Shop': {'2026-01':0,'2026-02':0,'2026-03':6712,'2026-04':32762,'2026-05':32762,'2026-06':58137,'2026-07':33953,'2026-08':32822,'2026-09':57661,'2026-10':32822,'2026-11':57661,'2026-12':32822}
-  },
+  SG: {}, // filled right after TARGETS_PLATFORM below by sgPlatformTargets() (SG total target x per-month Shopee/TikTok share)
   MY: {
     'Shopee':      {'2026-01':59733,'2026-02':63251,'2026-03':150070,'2026-04':212447,'2026-05':302548,'2026-06':571422,'2026-07':710811,'2026-08':735667,'2026-09':962329,'2026-10':829836,'2026-11':1023656,'2026-12':750643},
     'Lazada':      {'2026-01':0,'2026-02':541,'2026-03':13749,'2026-04':35233,'2026-05':53695,'2026-06':96784,'2026-07':115785,'2026-08':120931,'2026-09':155919,'2026-10':144673,'2026-11':182062,'2026-12':140483},
@@ -625,6 +615,48 @@ let TARGETS_PLATFORM = {
   }
 };
 const PLATFORM_TARGET_LIST = ['Shopee','Lazada','TikTok Shop'];
+// SG platform split: per-month Shopee / TikTok Shop share taken from the SG marketing calendar rows
+// "Shopee GMV Target 2026 (SGD)" / "TikTok Shop GMV Target 2026 (SGD)" (rows 11-12; calendar amounts below).
+// Platform target = TARGETS.SG[month] x share, so Shopee + TikTok always sums to the SG total target.
+// Jan/Feb have no target. TikTok Shop carries the larger share in most months, Shopee only in Mar.
+let SG_CALENDAR_PLATFORM_ROWS = { // fallback snapshot; refreshed live from the SG_Platform Target tab (cols L:M) by loadPlatformTargetsLive()
+ 
+  '2026-03':[8000,0], '2026-04':[21299,17749], '2026-05':[21299,17749], '2026-06':[23855,45439],
+  '2026-07':[8910,37559], '2026-08':[17821,21299], '2026-09':[26980,37866], '2026-10':[17821,21299],
+  '2026-11':[30861,37866], '2026-12':[17821,21299]
+};
+function sgPlatformTargets(){
+  const out = {'Shopee':{}, 'TikTok Shop':{}};
+  Object.keys(TARGETS.SG).forEach(m=>{
+    const row = SG_CALENDAR_PLATFORM_ROWS[m], tot = TARGETS.SG[m]||0;
+    const sum = row ? row[0]+row[1] : 0;
+    const shopee = (row && sum) ? Math.round(tot*row[0]/sum*100)/100 : 0;
+    out['Shopee'][m] = shopee;
+    out['TikTok Shop'][m] = (row && sum) ? Math.round((tot-shopee)*100)/100 : 0;
+  });
+  return out;
+}
+TARGETS_PLATFORM.SG = sgPlatformTargets();
+// Reads the calendar Shopee / TikTok Shop amounts the user maintains in SG_Platform Target cols L:M (Jan..Dec rows).
+function rowsToSgCalendarRows(rows){
+  const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  for(let i=0;i<rows.length-11;i++){
+    const c = (rows[i]||[]).findIndex(x=>String(x).trim()==='Jan');
+    if(c<0) continue;
+    const near = rows.slice(Math.max(0,i-6), i).map(r=>(r||[]).join(' ')).join(' ');
+    if(!/Platform Target/i.test(near)) continue;
+    let ok = true;
+    for(let k=0;k<12;k++){ if(String((rows[i+k]||[])[c]||'').trim()!==MS[k]){ ok=false; break; } }
+    if(!ok) continue;
+    const out = {};
+    for(let k=0;k<12;k++){
+      const r = rows[i+k];
+      out[`2026-${String(k+1).padStart(2,'0')}`] = [moneyNum(r[c+11]), moneyNum(r[c+12])];
+    }
+    return out;
+  }
+  throw new Error('SG calendar block not found');
+}
 const PLATFORM_LISTS = {TH:PLATFORM_TARGET_LIST, MY:PLATFORM_TARGET_LIST, SG:['Shopee','TikTok Shop']};
 
 // Prior-year (2025) actuals, native currency — used for YoY comparison.
@@ -3653,7 +3685,10 @@ function renderTargetTable(){
   const rows = targetRowsFor(mkt);
   const platData = platformTargetData(mkt);
   if(platData){
-    document.getElementById('targetCaption').textContent += ` · Platform columns = ${mkt==='TH'?'Samyang Official + Sino Family':'Samyang Official'} GMV by platform ÷ platform target (${CUR[mkt]}) · Targets from the Google Sheet "Monthly Platform Target" block, Ach % recalculates automatically as Oct-Dec data lands`;
+    {
+      const fm = n=> n>=1e6 ? (n/1e6).toFixed(1)+'M' : Math.round(n).toLocaleString('en-US');
+      document.getElementById('targetCaption').textContent += ` · Platform target (${CUR[mkt]}, FY): ` + platData.map(x=>`${x.p} ${fm(x.fyT)}`).join(' · ');
+    }
   }
   const fmt = (n)=> mkt==='APAC' ? fmtMoney(n) : n.toLocaleString('en-US',{maximumFractionDigits:0});
   // Target amounts convert at targetFx (TH's planning-rate override, 42.7);
@@ -4364,7 +4399,7 @@ function renderNewMarketTab(){
     : mkt==='GLOBAL'
     ? `Monthly, Jan – ${MONTH_NAME[LAST_ACTUAL_MONTH]} 2026 · stacked by market (Thailand/Malaysia/Singapore/Korea/US), ${newTabCurLabel(mkt)} · each month converted at that month's own real USD/KRW rate · dashed line = combined target`
     : mkt==='US'
-      ? `Monthly, Jan – ${MONTH_NAME[LAST_ACTUAL_MONTH]} 2026 · ${newTabCurLabel(mkt)} · real Orders/Sessions/GMV every month (AmazonUS_Sales) · dashed line = real AOP target (AmazonUS_Target_Month) · dashed blue = 2025 GMV (Amazon, real, same-month YoY)`
+      ? `Monthly, Jan – ${MONTH_NAME[LAST_ACTUAL_MONTH]} 2026 · ${newTabCurLabel(mkt)} · Target (AOP): Amazon + TikTok Shop`
       : `Monthly, ${rangeMonths.length?MONTH_NAME[rangeMonths[0]]:''} – ${rangeMonths.length?MONTH_NAME[rangeMonths[rangeMonths.length-1]]:''} 2026 · native currency (${mkt==='KR'?'KRW':'USD'}) · dashed line = target${mkt==='KR'?' · dashed blue = 2025 GMV (Coupang+Naver, real, same-month YoY) · dotted = Visitors / CVR %':''}`;
   const channelTitleEl = document.getElementById('channelChartTitle');
   if(channelTitleEl) channelTitleEl.textContent = mkt==='GLOBAL' ? 'Market mix (share of GMV)' : (mkt==='KR'||mkt==='US') ? 'Channel efficiency (CVR)' : 'Brand mix (share of GMV)';
@@ -4376,7 +4411,7 @@ function renderNewMarketTab(){
     : isUsDailyView
     ? 'Click a column header to sort · Amazon Sessions/Orders/GMV real (AmazonUS_Sales); TikTok Shop Unique Clicks/Orders/GMV also real (GOC_RAW_US TikTokUS_Sales, from 2026-01-22)'
     : isKrDaily
-    ? 'Click a column header to sort · Coupang + Naver, real daily SKU-level data — a few % off the official monthly total (see chart caption)'
+    ? 'Click a column header to sort · Coupang + Naver'
     : mkt==='KR' ? 'Click a column header to sort · Coupang + Naver, real monthly data'
     : mkt==='US' ? 'Click a column header to sort · Amazon + TikTok Shop, both real, one row per platform per month'
     : 'Click a column header to sort';
@@ -4638,16 +4673,16 @@ function renderKrChannelChart(mkt, rangeMonths){
   const tableCapEl = document.getElementById('krChannelTableCaption');
   if(tableCapEl) tableCapEl.textContent = isUs
     ? `Jan-YTD, real monthly GMV by platform (Amazon + TikTok Shop), shown together, ${newTabCurLabel('US')}`
-    : `Jan-YTD, real monthly GMV by platform (Coupang + Naver), same source as Korea's monthly total`;
+    : `Jan-YTD, real monthly GMV by platform (Coupang + Naver)`;
   const statsSecTitleEl = document.getElementById('krStatsSectionTitle');
   if(statsSecTitleEl) statsSecTitleEl.textContent = isUs ? 'Sessions/Clicks · Orders · CVR · AOV · GMV by platform' : 'Orders · AOV · CVR · Traffic (PV) by platform';
   const statsSecCapEl = document.getElementById('krStatsSectionCaption');
   if(statsSecCapEl) statsSecCapEl.textContent = isUs
     ? 'Jan-YTD, Amazon vs TikTok Shop side by side, shown together (no toggle); Amazon CVR = Orders ÷ Sessions, TikTok Shop CVR = Orders ÷ Unique Clicks'
-    : 'Jan-YTD, real monthly data, Coupang vs Naver side by side (same source)';
+    : 'Jan-YTD, real monthly data, Coupang vs Naver';
   if(capEl) capEl.textContent = isUs
     ? `Amazon ${(aSum/tot*100).toFixed(1)}% · TikTok Shop ${(bSum/tot*100).toFixed(1)}% of range GMV · ${newTabCurLabel('US')}, both real, shown together (no toggle)`
-    : `Coupang ${(aSum/tot*100).toFixed(1)}% · Naver ${(bSum/tot*100).toFixed(1)}% of range GMV · KRW, real monthly data (same source as Korea's monthly total)`;
+    : `Coupang ${(aSum/tot*100).toFixed(1)}% · Naver ${(bSum/tot*100).toFixed(1)}% of range GMV · KRW, real monthly data`;
 
   if(krChannelChart) krChannelChart.destroy();
   const ctx = canvasEl.getContext('2d');
@@ -4687,7 +4722,7 @@ function renderKrChannelChart(mkt, rangeMonths){
   });
   const scrollEl = document.getElementById('krChannelTableScroll');
   if(scrollEl) scrollEl.innerHTML = isUs
-    ? buildGenericBrandTable('US : Amazon vs TikTok Shop', monthlyByChannel, chNames, shownMonths, cur, 'Amazon + TikTok Shop, both real monthly GMV; shown together, no toggle')
+    ? buildGenericBrandTable('US : Amazon vs TikTok Shop', monthlyByChannel, chNames, shownMonths, cur, 'Amazon + TikTok Shop, both real monthly GMV')
     : buildGenericBrandTable('Korea — Coupang vs Naver', monthlyByChannel, chNames, shownMonths, '백만원', 'real monthly GMV by platform (백만원 단위), same source as Korea total GMV');
 }
 
@@ -5402,9 +5437,9 @@ function renderUsDailyTrendChart(){
     data:{labels, datasets:[
       {label:'Amazon GMV', data:gmvData, backgroundColor: newTabColor('US')+'cc', stack:'us', borderRadius:1, barPercentage:1, categoryPercentage:0.9, yAxisID:'y', order:2},
       {label:'TikTok Shop GMV', data:ttkDailyData, backgroundColor: PLATFORM_COLOR['TikTok Shop']+'cc', stack:'us', borderRadius:1, barPercentage:1, categoryPercentage:0.9, yAxisID:'y', order:2},
-      {label:'Sessions (Amazon+TikTok Shop)', data:sessData, type:'line', borderColor:'#c2ab9c', backgroundColor:'transparent',
+      {label:'Sessions', data:sessData, type:'line', borderColor:'#c2ab9c', backgroundColor:'transparent',
         borderDash:[3,3], pointRadius:0, borderWidth:1.5, yAxisID:'y1', order:0, tension:.3},
-      {label:'CVR % (Amazon+TikTok Shop)', data:blendedCvrData, type:'line', borderColor:'#1f9a53', backgroundColor:'transparent',
+      {label:'CVR %', data:blendedCvrData, type:'line', borderColor:'#1f9a53', backgroundColor:'transparent',
         borderDash:[2,2], pointRadius:0, borderWidth:1.5, yAxisID:'y2', order:0, tension:.3}
     ]},
     options:{
@@ -5986,7 +6021,7 @@ function renderNewBrandBreakdownTable(mkt){
       const row = (long && US_TIKTOK_BRAND_MONTHLY[long]) ? US_TIKTOK_BRAND_MONTHLY[long] : {Tangle:0,Buldak:0,MEP:0};
       tiktokByBrand[m] = {Tangle: (row.Tangle||0)*usMul, 'Buldak Sauce': (row.Buldak||0)*usMul, MEP: (row.MEP||0)*usMul};
     });
-    if(capEl) capEl.textContent = `Jan–${lastShortMonth} 2026, Amazon US + TikTok Shop US, both real · Buldak Sauce / Tangle / MEP · shown together, no toggle`;
+    if(capEl) capEl.textContent = `Jan–${lastShortMonth} 2026, Amazon US + TikTok Shop US, both real · Buldak Sauce / Tangle / MEP`;
     const amazonTableHtml = buildGenericBrandTable('US (Amazon)', amazonByBrand, ['Tangle','Buldak Sauce','MEP'], shownMonths, usCurrencyMode==='KRW'?'₩':'$', 'brand split = real monthly order share by SKU; GMV real for every month');
     const tiktokTableHtml = buildGenericBrandTable('US (TikTok Shop)', tiktokByBrand, ['Tangle','Buldak Sauce','MEP'], shownMonths, usCurrencyMode==='KRW'?'₩':'$', 'real per-brand GMV, Buldak Sauce vs Tangle (GOC_RAW_US TikTokUS_Sales, summed monthly) : MEP has no TikTok Shop presence; no Target/AOP for this platform, by design');
     document.getElementById('brandBreakdownScroll').innerHTML = amazonTableHtml + tiktokTableHtml;
@@ -6079,9 +6114,9 @@ function renderChannelEfficiency(mkt, monthly, rangeMonths){
   const titleEl = document.getElementById('channelEfficiencyTitle');
   if(titleEl) titleEl.textContent = 'Channel Efficiency';
   const capEl = document.getElementById('channelEfficiencyCaption');
-  if(capEl) capEl.textContent = 'Real data (AmazonUS_Sales / AmazonUS_Target_Month) · TACOS real Apr-Jul 2026 (AmazonUS_Ads campaign spend ÷ GMV); Jan-Mar (no ad-spend feed yet) and Aug (through 2026-08-23) fall back to the flat Oct-Dec 2025 trailing average · CVR = Orders ÷ Sessions';
+  if(capEl) capEl.textContent = '';
   const capTikTokEl = document.getElementById('channelEfficiencyCaptionTikTok');
-  if(capTikTokEl) capTikTokEl.textContent = 'Real data (GOC_RAW_US TikTokUS_Sales) · ROAS/TACOS removed -- no ad-spend feed for TikTok Shop · Target/AOP shown in Monthly Target vs Actual above · CVR = Orders ÷ Unique Clicks (TikTok Shop\'s real "visitor" proxy) · Buyers = unique Customers';
+  if(capTikTokEl) capTikTokEl.textContent = '';
 
   const amazonCards = usEfficiencyStats(US_MONTHLY, rangeMonths, 'Sessions');
   const tiktokCards = tiktokEfficiencyStats(US_TIKTOK_MONTHLY, rangeMonths);
@@ -6491,7 +6526,7 @@ function renderUsTargetTable(){
     <th style="text-align:center;">Total Cumulative Ach %</th>
     ${grp('Amazon', colA, tintA)}${grp('TikTok Shop', colT, tintT)}
   </tr>`;
-  document.getElementById('targetCaption').textContent = `US, ${newTabCurLabel('US')} (toggle above — each month converted at that month’s own real USD/KRW rate, from the Exchange Rate tab) · Target = AOP: Amazon (AmazonUS_Target_Month) + TikTok Shop (GOC_RAW_US target tab) · Total = Amazon + TikTok Shop · Ach % recalculates automatically as Oct-Dec data lands`;
+  document.getElementById('targetCaption').textContent = `US, ${newTabCurLabel('US')} (toggle above — each month converted at that month’s own real USD/KRW rate, from the Exchange Rate tab) · Target AOP (FY): Amazon ${fmtCompactCur('US', ALL_TARGET_MONTHS.reduce((x,m)=>x+((US_MONTHLY[m]&&US_MONTHLY[m].target)||0),0))} · TikTok Shop ${fmtCompactCur('US', ALL_TARGET_MONTHS.reduce((x,m)=>x+(US_TTK_MONTHLY_TARGET_AOP_USD[m]||0),0))} · Total ${fmtCompactCur('US', ALL_TARGET_MONTHS.reduce((x,m)=>x+((US_MONTHLY[m]&&US_MONTHLY[m].target)||0)+(US_TTK_MONTHLY_TARGET_AOP_USD[m]||0),0))}`;
   const cell = (n, m)=> usCurrencyMode==='KRW'
     ? '₩'+Math.round(n*fxRateForMonth(m)).toLocaleString('en-US')
     : fmtFullCur('US', n);
@@ -6640,7 +6675,7 @@ function renderKrTargetTable(monthly){
     <th style="text-align:center;color:${BRAND_COLOR.Naver};background:${tintNaver};">Naver Ach %</th>
     <th style="text-align:center;color:${BRAND_COLOR.Naver};background:${tintNaver};">Naver Cumulative Ach %</th>
   </tr>`;
-  document.getElementById('targetCaption').textContent = `Korea, native KRW · REAL data, fetched live from the Google Sheet during this build · Total = Coupang + Naver`;
+  document.getElementById('targetCaption').textContent = `Korea, native KRW · Total = Coupang + Naver`;
   const monthsShown = ALL_TARGET_MONTHS;
   const achCell = (target, actual, isFuture, tint)=>{
     const ach = target ? actual/target*100 : (actual>0?Infinity:0);
@@ -6833,8 +6868,8 @@ function renderAll(){
   document.getElementById('tableTitle').innerHTML = (state.gran==='daily' ? 'Daily performance detail' : 'Monthly performance detail') + scopeTagHtml(state.market);
   document.getElementById('targetTitle').innerHTML = 'Monthly Target vs Actual' + sinoTagHtml(state.market);
   document.getElementById('tableDetailCaption').textContent = (state.gran==='daily'
-    ? 'Click a column header to sort · Samyang Official only — excludes Sino (Sino has no daily breakdown, GMV-only)'
-    : 'Click a column header to sort') + ` · Range: ${rangeLabel()} · Total row = subtotal for this range`;
+    ? (state.market==='TH'||state.market==='APAC' ? 'Click a column header to sort · Samyang Official only — excludes Sino (Sino has no daily breakdown, GMV-only)' : 'Click a column header to sort')
+    : 'Click a column header to sort') + ` · Range: ${rangeLabel()}`;
   updateHeroSub();
   updateChannelFilterOptions();
   renderRangeControls();
@@ -8009,8 +8044,18 @@ function rowsToPlatformTargets(rows, plats){
   throw new Error('Monthly Platform Target block not found');
 }
 async function loadPlatformTargetsLive(){
-  // SG keeps its existing TARGETS.SG (HQ-rescaled, unrounded); only its platform split is read from the sheet.
-  const specs = [['TH', 1580312854, true], ['MY', 1701623833, true], ['SG', 1150667618, false]];
+  const specs = [['TH', 1580312854, true], ['MY', 1701623833, true]];
+  // SG: platform target = TARGETS.SG x per-month share of the calendar amounts in SG_Platform Target cols L:M
+  const sgJob = (async ()=>{
+    try {
+      const rows = await fetchSheetRowsEx(RAW_SHEET_ID, {gid:1150667618});
+      const cal = rowsToSgCalendarRows(rows);
+      if(!Object.values(cal).some(v=>v[0]+v[1]>0)) throw new Error('empty SG calendar columns');
+      SG_CALENDAR_PLATFORM_ROWS = cal;
+      TARGETS_PLATFORM.SG = sgPlatformTargets();
+    } catch(e){ console.warn('SG platform targets live refresh failed, keeping fallback', e); }
+  })();
+  await sgJob;
   await Promise.all(specs.map(async ([mkt, gid, overwriteTotals])=>{
     try {
       const rows = await fetchSheetRowsEx(RAW_SHEET_ID, {gid});
